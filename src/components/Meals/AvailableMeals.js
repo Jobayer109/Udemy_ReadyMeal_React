@@ -31,10 +31,14 @@ const AvailableMeals = () => {
   ];
   return (
     <Card>
-      {DUMMY_MEALS.map((meals) => (
-        <ul key={meals.id}>
-          <MealItem meals={meals} />{" "}
-        </ul>
+      {DUMMY_MEALS.map((meal) => (
+        <MealItem
+          key={meal.id}
+          id={meal.id}
+          name={meal.name}
+          description={meal.description}
+          price={meal.price}
+        />
       ))}
     </Card>
   );
