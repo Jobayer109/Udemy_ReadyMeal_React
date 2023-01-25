@@ -38,6 +38,17 @@ const Cart = (props) => {
     setShowInfo(true);
   };
 
+  const submitOrderHandler = (userData) => {
+    console.log(userData);
+    fetch("https://ready-meals-default-rtdb.firebaseio.com/orders.json", {
+      method: "POST",
+      body: JSON.stringify({
+        user: userData,
+        orderedData: cartCtx.items,
+      }),
+    });
+  };
+
   return (
     <Modal onClose={props.onClose}>
       {cartItem}
@@ -46,7 +57,7 @@ const Cart = (props) => {
         <span>{totalAmount}</span>
       </div>
 
-      {showInfo && <Checkout onCancel={props.onClose} />}
+      {showInfo && <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />}
       {!showInfo && (
         <div className={classes.actions}>
           <button className={classes["button--alt"]} onClick={props.onClose}>
